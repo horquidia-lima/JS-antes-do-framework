@@ -19,10 +19,10 @@
 
     <script>
         const routes = {
-            "/": "/pages/home.html",
-            "/about": "/pages/about.html",
-            "/contato": "/pages/contato.html",
-            404: "/pages/404.html",
+            "/": "conceito-SPA/pages/home.html",
+            "/about": "conceito-SPA/pages/about.html",
+            "/contato": "conceito-SPA/pages/contato.html",
+            404: "conceito-SPA/pages/404.html",
 
         }
 
@@ -36,8 +36,14 @@
         }
 
         function handle(){
-            const {pathname, href, host, port} = window.location
-            console.log(pathname, href, host, port)
+            const {pathname} = window.location
+            const route = routes[pathname] || routes[404]
+
+            console.log("antes do fetch")
+            fetch(route)
+                .then(data => data.text())
+                .then(html => console.log(html))
+            console.log(route)
         }
     </script>
 </body>
